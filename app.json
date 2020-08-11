@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Central Park Tower",
+    "icon": "./app/theme/images/icon.png",
+    "version": "1.0",
+    "slug": "central-park",
+    "ios": {
+      "bundleIdentifier": "ru.altsoft.saas.centralpark",
+      "icon": "./app/theme/images/icon.png",
+      "buildNumber": "1.0"
+    },
+    "splash": {
+      "image": "./app/theme/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "ru.altsoft.saas.centralpark",
+      "versionCode": 1,
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_INTERNAL_STORAGE",
+        "WRITE_INTERNAL_STORAGE",
+        "CAMERA",
+        "CAMERA_ROLL"
+      ],
+      "icon": "./app/theme/images/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./app/theme/images/android_icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "description": "",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, StyleSheet, Text, Image, Platform } from 'react-native';
-import { ImagePicker, Permissions } from 'expo';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 export default class ImagePickerComponent extends React.Component {
   constructor(props) {

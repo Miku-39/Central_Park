@@ -15,7 +15,7 @@ function * loginSaga(action) {
 
         const sessionResponse = yield call(api.authorize)
         const { id, name, companyId, accountId, department,
-           accountName, roles, company } = sessionResponse.data
+           accountName, roles, company, phone } = sessionResponse.data
         const carParkings = (yield call(api.fetchParkingsForCars)).data
         const isLesnaya = accountId == '14366'
 
@@ -30,7 +30,8 @@ function * loginSaga(action) {
             carParkings: carParkings,
             isLesnaya: isLesnaya,
             department: company.departmentId,
-            departmentId: department
+            departmentId: department,
+            phone: phone
             //goodsParkings: goodsParkings,
             //services: services
         }

@@ -80,7 +80,8 @@ export default class GoodsScreen extends Component {
             client: companyId,
             nonstandardCarNumber: true,
             materialValuesData: '',
-            longTerm: false
+            longTerm: false,
+            phone: session.phone
         }
 
 
@@ -132,7 +133,8 @@ export default class GoodsScreen extends Component {
 
         var fieldsHighlights = {
           materialValuesData: !ticket.materialValuesData,
-          expirationDate: ticket.longTerm && !ticket.expirationDate
+          expirationDate: ticket.longTerm && !ticket.expirationDate,
+          phone: !ticket.phone
           //carNumber: !ticket.carNumber
         }
 

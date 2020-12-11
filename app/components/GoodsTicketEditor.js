@@ -101,6 +101,17 @@ export default class GoodsTicketEditor extends Component {
                         placeholder="Выберите дату"
                         />
                       }
+                      <Fumi
+                          style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.phone ? Colors.accentColor : '#FFF'}]}
+                          label={'Телефон заявителя *'}
+                          iconClass={Icon}
+                          iconName={'phone'}
+                          value={this.props.ticket.phone}
+                          iconColor={Colors.textColor}
+                          iconSize={20}
+                          labelStyle={styles.fumiLabel}
+                          inputStyle={styles.fumiInput}
+                          onChangeText={(text) => {this.updateField(text, 'phone')}}/>
                       {this.props.session.isLesnaya &&
                       <PickerComponent
                           label="Здание"

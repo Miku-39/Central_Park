@@ -15,10 +15,12 @@ function * loginSaga(action) {
 
         const sessionResponse = yield call(api.authorize)
         const { id, name, companyId, accountId, department,
-           accountName, roles, company, phone } = sessionResponse.data
+           accountName, roles, company } = sessionResponse.data
+
+        const phone = (yield call(api.fetchPhone, id)).data[0].phone
         const carParkings = (yield call(api.fetchParkingsForCars)).data
         const isLesnaya = accountId == '14366'
-
+        console.log(phone)
         const session = {
             token: access_token,
             userId: id,

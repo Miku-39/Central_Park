@@ -52,7 +52,19 @@ export default class ServiceScreen extends Component {
                     onUpdate={(text) => {this.props.updateField(text, 'department')}}/>
                 </View>}
 
-                <View>
+                <View style={styles.fieldsContainer}>
+                <Fumi
+                    style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.phone ? Colors.accentColor : '#FFF'}]}
+                    label={'Телефон заявителя *'}
+                    iconClass={Icon}
+                    iconName={'phone'}
+                    value={this.props.ticket.phone}
+                    iconColor={Colors.textColor}
+                    iconSize={20}
+                    labelStyle={styles.fumiLabel}
+                    inputStyle={styles.fumiInput}
+                    onChangeText={(text) => {this.props.updateField(text, 'phone')}}/>
+
                 <Fumi
                     style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.whereHappened ? Colors.accentColor : '#FFF'}]}
                     label={'Где произошло'}
@@ -63,6 +75,8 @@ export default class ServiceScreen extends Component {
                     inputStyle={styles.fumiInput}
                     onChangeText={(text) => {this.props.updateField(text, 'whereHappened')}}
                 />
+                </View>
+                <View>
                 <TextInput
                   placeholder="Что сделать *"
                   underlineColorAndroid='transparent'

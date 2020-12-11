@@ -53,6 +53,7 @@ const setAuthHeader = (token) => instance.defaults.headers.authorization = `Bear
 const fetchTicketsForCheckpoint = userId => instance.get(`/vnext/v1/requests?filters=RequestsForCheckpoint,CurrentDayRequests&startAt=1&limit=300`)
 const fetchTicketsForSecurityChief = userId => instance.get(`/vNext/v1/requests?filters=RequestsForBolshevikSecurityChief,CurrentDayRequests&pageSize=100&pageNumber=1&orderBy=Number*-1`)
 const fetchParkingsForCars = () => instance.get(`vNext/v1/parkings`).catch(onError)
+const fetchPhone = (id) => instance.get(`vNext/v1/employees?filterBy=id="${id}"`)
 //const fetchParkingsForGoods = () => instance.get(`/vNext/v1/parkings`).catch(onError)
 const fetchAllTickets = companyId => instance.get('vNext/v1/requests?orderBy=number+desc,&filters=RequestsForTenant,NotClosedRequests&pageSize=100&pageNumber=1', conf).catch(onError)
 const fetchOnCreateTickets = companyId => instance.get('vNext/v1/requests?orderBy=number+desc,&filters=RequestsForUserDepartment,OnCreateRequests&pageSize=100&pageNumber=1', conf).catch(onError)
@@ -66,4 +67,4 @@ const addTicket = (ticket) => instance.post('/vNext/v1/requests', ticket).catch(
 export default { login, authorize, setAuthHeader,
                  fetchParkingsForCars, /*fetchParkingsForGoods,*/ fetchAllTickets, updateTicketStatus,
                  addTicket, addFile, fetchTicketsForCheckpoint, fetchTicketsForSecurityChief, fetchOpenTickets,
-                  fetchOpenTicketsRestricted, fetchOnCreateTickets, getFileLink }
+                  fetchOpenTicketsRestricted, fetchOnCreateTickets, getFileLink, fetchPhone }

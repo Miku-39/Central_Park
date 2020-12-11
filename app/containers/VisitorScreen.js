@@ -72,23 +72,12 @@ export default class VisitorScreen extends Component {
             actualCreationDate: nowDate,
             visitDate: nowDate,
             author: employeeId,
+            phone: session.phone,
             status: NEW_TICKET_STATUS_ID,
             type: ticketType == 'VISITOR' ? VISITOR_TICKET_TYPE : CAR_TICKET_TYPE,
             client: companyId,
             nonstandardCarNumber: true,
             longTerm: false,
-            department: session.isLesnaya ? session.department : null
-        }
-
-        if(session.isLesnaya){
-          ticket.department = session.department
-          if(ticketType == 'VISITOR'){
-            ticket.status = ACCEPTED_TICKET_STATUS_ID
-          }
-          if(ticketType == 'CAR'){
-            ticket.manager = ticket.department == '3959751378000' ? '3959752547000' : '3959752571000' //если Лесная, то Зиновьев
-            ticket.observersText = ticket.department == '3959751378000' ? '3959752576000' : null //если Лесная, то Курандикова
-          }
         }
 
         const fieldsHighlights = {}
@@ -126,17 +115,11 @@ export default class VisitorScreen extends Component {
         const { ticketType } = this.props.navigation.state.params
         const { session } = this.props
 
-        if(session.isLesnaya){
-          if(ticketType == 'CAR'){
-            ticket.manager = ticket.department == '3959751378000' ? '3959752547000' : '3959752571000' //если Лесная, то Зиновьев
-            ticket.observersText = ticket.department == '3959751378000' ? '3959752576000' : null //если Лесная, то Курандикова
-          }
-        }
-
         var fieldsHighlights = {
           expirationDate: (ticket.longTerm && !ticket.expirationDate),
           visitorFullName: !ticket.visitorFullName && ticketType == 'VISITOR',
-          carNumber: !ticket.carNumber && ticketType =='CAR'
+          carNumber: !ticket.carNumber && ticketType =='CAR',
+          phone: !ticket.phone
         }
 
         var passed = true;

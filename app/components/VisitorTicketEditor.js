@@ -136,6 +136,17 @@ export default class VisitorTicketEditor extends Component {
                           labelStyle={styles.fumiLabel}
                           inputStyle={styles.fumiInput}
                           onChangeText={(text) => {this.updateField(text, 'whoMeets')}}/>}
+                      <Fumi
+                          style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.phone ? Colors.accentColor : '#FFF'}]}
+                          label={'Телефон встречающего *'}
+                          iconClass={Icon}
+                          iconName={'phone'}
+                          value={this.props.ticket.phone}
+                          iconColor={Colors.textColor}
+                          iconSize={20}
+                          labelStyle={styles.fumiLabel}
+                          inputStyle={styles.fumiInput}
+                          onChangeText={(text) => {this.updateField(text, 'phone')}}/>
                   </View>
 
                   {this.props.ticketType == 'CAR' &&

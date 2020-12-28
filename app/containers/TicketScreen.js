@@ -20,7 +20,7 @@ const fieldsProperties = [
 }, {
   whoMeets:           { name: 'ФИО встречающего', type: 'text' },
   khimkiEmailMeeting: { name: 'E-mail встречающего', type: 'text' },
-  phone:              { name: 'Телефон встречающего', type: 'text' }
+  phone:              { name: 'Контактный телефон', type: 'text' }
 }, {
   file:               { name: 'Файл', type: 'file'}
 }, {

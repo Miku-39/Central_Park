@@ -12,9 +12,9 @@ const conf = {
 const instance = axios.create(conf)
 
 const onError = (error) => {
-  console.error(error)
+  //console.error(error)
   if (error.response) {
-    console.warn('axios onError', error.response)
+    //console.warn('axios onError', error.response)
 
     if (error.response.status === 400) {
       throw Error('Не верный логин или пароль')
@@ -22,10 +22,10 @@ const onError = (error) => {
       throw Error('При обработке запроса на сервере произошла ошибка, мы ее зафиксировали и уже разбираемся в причинах.')
     }
   } else if (error.request) {
-    console.warn('axios onError', error.request)
+    //console.warn('axios onError', error.request)
     throw Error('Сервер недоступен. Проверьте свое интернет-соединение')
   } else {
-    console.warn('Error', error.message)
+    //console.warn('Error', error.message)
   }
 }
 

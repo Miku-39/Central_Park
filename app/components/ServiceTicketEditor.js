@@ -55,7 +55,7 @@ export default class ServiceScreen extends Component {
                 <View style={styles.fieldsContainer}>
                 <Fumi
                     style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.phone ? Colors.accentColor : '#FFF'}]}
-                    label={'Телефон заявителя *'}
+                    label={'Контактный телефон *'}
                     iconClass={Icon}
                     iconName={'phone'}
                     value={this.props.ticket.phone}

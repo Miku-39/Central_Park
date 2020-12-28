@@ -73,6 +73,13 @@ export default MainComponent = (props) => {
                           </View>
                     </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => { props.addCardTicket() }}>
+                      <View style={styles.Button}>
+                          <Image resizeMode='contain' source={Images.card} style={styles.buttonImage} />
+                          <Text style={styles.buttonLabel}>На пропуск</Text>
+                      </View>
+                    </TouchableOpacity>
+
                     <TouchableOpacity onPress={() => { props.addServiceTicket() }}>
                         <View style={styles.Button}>
                           <Image resizeMode='contain' source={Images.wrench} style={styles.buttonImage} />
@@ -80,13 +87,12 @@ export default MainComponent = (props) => {
                         </View>
                     </TouchableOpacity>
 
-                    {!(session.isLesnaya && !session.roles.includes('tenant')) &&
                     <TouchableOpacity onPress={() => { props.openTickets('regularTickets') }}>
-                        <View style={styles.Button}>
+                        <View style={[styles.Button, {width: '100%'}]}>
                             <Image resizeMode='contain' source={Images.list} style={styles.buttonImage}/>
                             <Text style={styles.buttonLabel}>Наши заявки</Text>
                         </View>
-                    </TouchableOpacity>}
+                    </TouchableOpacity>
 
             </View>
         </ScrollView>

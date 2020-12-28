@@ -29,21 +29,21 @@ export default class VisitorTicketEditor extends Component {
      this.state = {
        selectedValue: null,
        //selectedParking: this.props.initialParking,
-       fieldsVisible: {
-         parkingPlace: true,
-         expirationDate: false,
-       },
        expirationDate: null,
        //'additionalFieldsVisible': false,
-       carFieldsVisible: this.props.ticketType == 'CAR',
+       isGroupRequest: false, //поля для групповых заявок
+       carFieldsVisible: this.props.ticketType == 'CAR', //показать поля для авто
        longTerm: false,
      }
   }
 
-  setVisible = (field) => {
+  setFlag = (field) => {
     state = this.state
     state[field] = !state[field]
     if(field == 'longTerm'){
+      this.props.updateField(state[field], field);
+    }
+    if(field == 'isGroupRequest'){
       this.props.updateField(state[field], field);
     }
     LayoutAnimation.easeInEaseOut();
@@ -57,11 +57,6 @@ export default class VisitorTicketEditor extends Component {
     var fields = this.state
     fields[field] = data
 
-    var fieldsVisible = {
-      expirationDate: fields.longTerm
-    }
-
-    fields['fieldsVisible'] = fieldsVisible
     this.setState(fields);
   }
 
@@ -96,7 +91,7 @@ export default class VisitorTicketEditor extends Component {
                         textStyle={styles.checkboxText}
                         checked={this.state.longTerm}
                         checkedColor={Colors.textColor}
-                        onPress={() => {this.setVisible('longTerm')}}/>
+                        onPress={() => {this.setFlag('longTerm')}}/>
                       {this.state.longTerm &&
                       <DatePickerComponent
                         isHighlighted={this.props.fieldsHighlights.expirationDate}
@@ -106,15 +101,35 @@ export default class VisitorTicketEditor extends Component {
                         placeholder="Выберите дату"
                         />
                       }
-                      {this.props.session.isLesnaya &&
-                      <PickerComponent
-                          label="Здание"
-                          removeEmptyField={true}
-                          items={this.props.lesnayaDepartments}
-                          onUpdate={(text) => {this.updateField(text, 'department')}}/>}
+                      <CheckBox
+                        title='Групповая заявка'
+                        containerStyle={styles.checkboxContainer}
+                        textStyle={styles.checkboxText}
+                        checked={this.state.isGroupRequest}
+                        checkedColor={Colors.textColor}
+                        onPress={() => {this.setFlag('isGroupRequest')}}/>
                   </View>
 
+                  {this.state.isGroupRequest &&
+                  <View>
                   <View style={styles.fieldsContainer}>
+                      <Text style={styles.field}>Список посетителей *</Text>
+
+                      <TextInput
+                        placeholder="ФИО посетителя № авто (формат: х111хх77) и марка пишутся в одну строку, каждый посетитель пишется с новой строки"
+                        underlineColorAndroid='transparent'
+                        style={[styles.textInputStyle, {borderColor: this.props.fieldsHighlights.groupRequestVisitorsData ? Colors.accentColor : '#FFF'}]}
+                        multiline={true}
+                        scrollEnabled={true}
+                        onChangeText={(text) => {this.props.updateField(text, 'groupRequestVisitorsData')}}
+                        />
+                  </View>
+                  </View>
+                  }
+
+
+                  <View style={styles.fieldsContainer}>
+                      {!this.state.isGroupRequest &&
                       <Fumi
                           style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.visitorFullName ? Colors.accentColor : '#FFF'}]}
                           label={ticketType == 'VISITOR' ? 'ФИО посетителя *' : 'ФИО посетителя'}
@@ -125,6 +140,7 @@ export default class VisitorTicketEditor extends Component {
                           labelStyle={styles.fumiLabel}
                           inputStyle={styles.fumiInput}
                           onChangeText={(text) => {this.updateField(text, 'visitorFullName')}}/>
+                      }
                       {ticketType == 'VISITOR' &&
                       <Fumi
                           style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.whoMeets ? Colors.accentColor : '#FFF'}]}
@@ -138,7 +154,7 @@ export default class VisitorTicketEditor extends Component {
                           onChangeText={(text) => {this.updateField(text, 'whoMeets')}}/>}
                       <Fumi
                           style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.phone ? Colors.accentColor : '#FFF'}]}
-                          label={'Телефон встречающего *'}
+                          label={'Контактный телефон *'}
                           iconClass={Icon}
                           iconName={'phone'}
                           value={this.props.ticket.phone}
@@ -149,7 +165,7 @@ export default class VisitorTicketEditor extends Component {
                           onChangeText={(text) => {this.updateField(text, 'phone')}}/>
                   </View>
 
-                  {this.props.ticketType == 'CAR' &&
+                  {((this.props.ticketType == 'CAR') && !this.state.isGroupRequest) &&
                   <View style={styles.fieldsContainer}>
                       <Fumi
                           style={styles.fumiStyle}
@@ -171,12 +187,14 @@ export default class VisitorTicketEditor extends Component {
                           labelStyle={styles.fumiLabel}
                           inputStyle={styles.fumiInput}
                           onChangeText={(text) => {this.updateField(text, 'carNumber')}}/>
-
+                    </View>
+                  }
+                  {this.props.ticketType == 'CAR' &&
                       <PickerComponent
                           label="Парковка"
                           items={this.props.carParkings}
                           onUpdate={(text) => {this.updateField(text, 'parking')}}/>
-                 </View>}
+                  }
 
                   <View style={styles.fieldsContainer}>
                     <TextInput

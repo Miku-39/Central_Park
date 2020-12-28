@@ -103,7 +103,7 @@ export default class GoodsTicketEditor extends Component {
                       }
                       <Fumi
                           style={[styles.fumiStyle, {borderColor: this.props.fieldsHighlights.phone ? Colors.accentColor : '#FFF'}]}
-                          label={'Телефон заявителя *'}
+                          label={'Контактный телефон *'}
                           iconClass={Icon}
                           iconName={'phone'}
                           value={this.props.ticket.phone}
